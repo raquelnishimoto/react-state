@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './App.css';
 
 /*
-// 1. Display `WOW! {name}'s speed is {time} km/h!`
+// 1. Diplay `WOW! {name}'s speed is {time} km/h!`
 // 2. Display `Current sprint name is {name}`
 */
 
@@ -14,11 +14,17 @@ const sleep = (time: number) => {
   }
 };
 
-const PlaneName = () => {
+const PlaneName = ({
+  name,
+  onChangeName,
+}: {
+  name: string;
+  onChangeName: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}) => {
   return (
     <div>
       <label htmlFor="name">Plane Name: </label>
-      <input id="name" onChange={(e) => e.target.value}></input>
+      <input id="name" onChange={onChangeName} value={name}></input>
     </div>
   );
 };
@@ -47,21 +53,22 @@ const Speed = ({
 };
 
 // ⚠️ Uncomment next line before exercise 1
-// const Display = ({ name, time }: { name: string; time: number }) => {
-//   return <div>{`WOW! ${name}'s speed is ${time} km/h!`}</div>;
+// const Display = ({ plane, time }: { plane: string; time: number }) => {
+//   return <div>{`WOW! ${plane}'s speed is ${time} km/h!`}</div>;
 // };
 
-const Display = ({ time }: { time: number }) => {
-  return <div>{`The plane speed is ${time} km/h!`}</div>;
+const Display = ({ plane, time }: { plane: string; time: number }) => {
+  return <div>{`WOW! ${plane}'s speed is ${time} km/h!`}</div>;
 };
 
 function App() {
+  const [name, setName] = useState('');
   const [time, setTime] = useState(200);
 
   return (
     <form>
-      <PlaneName />
-      <Display time={time} />
+      <PlaneName name={name} onChangeName={(e) => setName(e.target.value)} />
+      <Display plane={name} time={time} />
       <Speed
         time={time}
         onTimeChange={(e) => setTime(Number(e.target.value))}
