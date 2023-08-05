@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import './App.css';
 
 /*
-// 1. Display `WOW! {name}'s speed is {time} km/h!`
-// 2. Display `Current sprint name is {name}`
+// 1. Display `WOW! {name}'s speed is {speed} km/h!`
+// 2. Display `The plane speed is {speed} km/h!`
 */
 
 const sleep = (time: number) => {
@@ -24,14 +24,14 @@ const PlaneName = () => {
 };
 
 const Speed = ({
-  time,
-  onTimeChange,
+  speed,
+  onSpeedChange,
 }: {
-  onTimeChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  time: number;
+  onSpeedChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  speed: number;
 }) => {
   // ⚠️ Uncomment next line before exercise 2
-  // sleep(time);
+  // sleep(speed);
 
   return (
     <div>
@@ -39,32 +39,32 @@ const Speed = ({
       <input
         id="speed"
         type="number"
-        value={time}
-        onChange={onTimeChange}
+        value={speed}
+        onChange={onSpeedChange}
       ></input>
     </div>
   );
 };
 
 // ⚠️ Uncomment next line before exercise 1
-// const Display = ({ name, time }: { name: string; time: number }) => {
-//   return <div>{`WOW! ${name}'s speed is ${time} km/h!`}</div>;
+// const Display = ({ name, speed }: { name: string; speed: number }) => {
+//   return <div>{`WOW! ${name}'s speed is ${speed} km/h!`}</div>;
 // };
 
-const Display = ({ time }: { time: number }) => {
-  return <div>{`The plane speed is ${time} km/h!`}</div>;
+const Display = ({ speed }: { speed: number }) => {
+  return <div>{`The plane speed is ${speed} km/h!`}</div>;
 };
 
 function App() {
-  const [time, setTime] = useState(200);
+  const [speed, setSpeed] = useState(200);
 
   return (
     <form>
       <PlaneName />
-      <Display time={time} />
+      <Display speed={speed} />
       <Speed
-        time={time}
-        onTimeChange={(e) => setTime(Number(e.target.value))}
+        speed={speed}
+        onSpeedChange={(e) => setSpeed(Number(e.target.value))}
       />
     </form>
   );
